@@ -2,12 +2,12 @@ echo "Hello! Welcome to Jehadsama's service!"
 
 echo "deploy.sh start!"
 
-IMAGENAME=$1
-echo "IMAGESNAME is $IMAGENAME"
-index=`expr index $IMAGENAME :`
-num=`expr $index - 1`
-IMAGE=${IMAGENAME:0:num}
-echo "IMAGE is ${IMAGE}"
+REPO=$1
+echo "REPO is $REPO"
+IMAGE=$2
+echo "IMAGE is $IMAGE"
+TAG=$3
+echo "TAG is $TAG"
 
 docker login -u jehadsama -p l2598635
 docker  pull $IMAGENAME
