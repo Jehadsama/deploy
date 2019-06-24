@@ -16,18 +16,11 @@ const runCmd = async (repo, name, tag = 'latest') => {
 
 const app = express();
 app.get('/', async (req, res) => {
-  const { project } = req.query;
-  if (!project) {
+  const { repo, name, tag = 'latest' } = req.query;
+  if (!repo || !name) {
     res.send({ success: false, desc: 'invalid project name', code: 14000 });
     return res.end();
   }
-  if (!project.include(':') || !project.include('/')) {
-    res.send({ success: false, desc: 'invalid project name', code: 14001 });
-    return res.end();
-  }
-
-  const [imageName, tag] = project.split(':');
-  const [repo, name] = imageName.split('/');
   await runCmd(repo, name, tag);
   res.send({ success: true });
   return res.end();
