@@ -13,7 +13,7 @@ const runCmd = async name => {
 };
 
 const app = express();
-app.get('/deploy', async (req, res) => {
+app.get('/', async (req, res) => {
   const { project } = req.query;
   if (!project) {
     res.send({ success: false, desc: 'invalid project name' });
