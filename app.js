@@ -16,7 +16,11 @@ const app = express();
 app.get('/', async (req, res) => {
   const { project } = req.query;
   if (!project) {
-    res.send({ success: false, desc: 'invalid project name' });
+    res.send({ success: false, desc: 'invalid project name', code: 14000 });
+    return res.end();
+  }
+  if (!project.include(':')) {
+    res.send({ success: false, desc: 'invalid project name', code: 14001 });
     return res.end();
   }
   await runCmd(project);
