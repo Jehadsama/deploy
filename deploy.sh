@@ -9,6 +9,8 @@ echo "IMAGE is $IMAGE"
 TAG=$3
 echo "TAG is $TAG"
 
+IMAGENAME=$REPO/$IMAGE:$TAG
+
 docker login -u jehadsama -p l2598635
 docker  pull $IMAGENAME
 docker stop $IMAGE && docker rm $IMAGE
