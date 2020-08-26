@@ -1,23 +1,23 @@
 language: node_js
-
 services:
-  - docker #需要的docker环境
-
+- docker
 stages:
-  - build
-  - test
-  - deploy
-
+- build
+- test
+- deploy
 job:
-  - stage: build
-    script:
-      - echo "$DOCKERUSER will build images"
-      - docker login -u ${DOCKERUSER} --password ${DOCKERPASSWORD}
-      - IMAGENAME=${DOCKERUSER}/deploy
-      - echo $IMAGENAME
-      - docker build  -t ${IMAGENAME} .
-      - docker push ${IMAGENAME}
-  - stage: test
-    script: echo "this is test stage"
-  - stage: deploy
-    script: echo "this is deploy stage"
+- stage: build
+  script:
+  - echo "$DOCKERUSER will build images"
+  - docker login -u ${DOCKERUSER} --password ${DOCKERPASSWORD}
+  - IMAGENAME=${DOCKERUSER}/deploy
+  - echo $IMAGENAME
+  - docker build  -t ${IMAGENAME} .
+  - docker push ${IMAGENAME}
+- stage: test
+  script: echo "this is test stage"
+- stage: deploy
+  script: echo "this is deploy stage"
+before_install:
+- openssl aes-256-cbc -K $encrypted_9b2d7e19d83c_key -iv $encrypted_9b2d7e19d83c_iv
+  -in id_rsa.enc -out ~\/.ssh/id_rsa -d
