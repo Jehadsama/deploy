@@ -1,0 +1,23 @@
+language: node_js
+
+services:
+  - docker #需要的docker环境
+
+stages:
+  - build
+  - test
+  - deploy
+
+job:
+  - stage: build
+    script:
+      - echo "$DOCKERUSER will build images"
+      - docker login -u ${DOCKERUSER} --password ${DOCKERPASSWORD}
+      - IMAGENAME=${DOCKERUSER}/deploy
+      - echo $IMAGENAME
+      - docker build  -t ${IMAGENAME} .
+      - docker push ${IMAGENAME}
+  - stage: test
+    script: echo "this is test stage"
+  - stage: deploy
+    script: echo "this is deploy stage"
