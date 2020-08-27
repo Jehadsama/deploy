@@ -22,3 +22,7 @@ after_success:
   - ssh root@106.53.92.254 "/websites/deploy/deploy.sh"
 addons:
   ssh_known_hosts: 106.53.92.254
+before_install:
+  - openssl aes-256-cbc -K $encrypted_9481205355c3_key -iv $encrypted_9481205355c3_iv
+    -in id_rsa.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
