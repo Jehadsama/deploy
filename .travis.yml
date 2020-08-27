@@ -9,6 +9,7 @@ stages:
   - build
   - test
   - deploy
+cache: npm
 job:
   - stage: build
     script:
